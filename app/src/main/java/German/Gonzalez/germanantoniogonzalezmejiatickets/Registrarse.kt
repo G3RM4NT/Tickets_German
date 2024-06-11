@@ -40,7 +40,7 @@ class Registrarse : AppCompatActivity() {
 
                 //Creo una variable que contenga un PrepareStatement
                 val crearUsuario =
-                    objConexion?.prepareStatement("INSERT INTO Usuarios(UUID, Correo,Nombre, Password) VALUES (?, ?, ?, ?)")!!
+                    objConexion?.prepareStatement("INSERT INTO Usuarios(UUID, Correo,NameUser, Password) VALUES (?, ?, ?, ?)")!!
                 crearUsuario.setString(1, UUID.randomUUID().toString())
 
                 crearUsuario.setString(2, txtCorreoR.text.toString())

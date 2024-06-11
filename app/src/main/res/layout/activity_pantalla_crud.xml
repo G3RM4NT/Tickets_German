@@ -7,4 +7,105 @@
     android:layout_height="match_parent"
     tools:context=".PantallaCrud">
 
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Helpdesk"
+        tools:layout_editor_absoluteX="157dp"
+        tools:layout_editor_absoluteY="22dp" />
+
+    <EditText
+        android:id="@+id/txtNumeroTicket"
+        android:layout_width="149dp"
+        android:layout_height="38dp"
+        android:ems="10"
+        android:hint="Numero ticket"
+        android:inputType="text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.061"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.119" />
+
+    <EditText
+        android:id="@+id/txtDescripciónTicket"
+        android:layout_width="146dp"
+        android:layout_height="56dp"
+        android:ems="10"
+        android:hint="Descripción"
+        android:inputType="text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.769"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.109" />
+
+    <EditText
+        android:id="@+id/txtAutor"
+        android:layout_width="151dp"
+        android:layout_height="67dp"
+        android:ems="10"
+        android:hint="Autor"
+        android:inputType="text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.061"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.216" />
+
+    <EditText
+        android:id="@+id/txtEmailautor"
+        android:layout_width="151dp"
+        android:layout_height="56dp"
+        android:ems="10"
+        android:hint="Email Autor"
+        android:inputType="text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.784"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.229" />
+
+    <EditText
+        android:id="@+id/txtFechacreacion"
+        android:layout_width="147dp"
+        android:layout_height="67dp"
+        android:ems="10"
+        android:hint="Fecha de creación"
+        android:inputType="text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.075"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.356" />
+
+    <EditText
+        android:id="@+id/txtestadoTicket"
+        android:layout_width="147dp"
+        android:layout_height="56dp"
+        android:ems="10"
+        android:hint="Estado del ticket"
+        android:inputType="text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.818"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.367" />
+
+    <EditText
+        android:id="@+id/txtFechafinalticket"
+        android:layout_width="151dp"
+        android:layout_height="67dp"
+        android:ems="10"
+        android:hint="Fecha final del ticket"
+        android:inputType="text"
+        tools:layout_editor_absoluteX="115dp"
+        tools:layout_editor_absoluteY="345dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
