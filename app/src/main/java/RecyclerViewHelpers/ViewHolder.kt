@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 
 class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-    val lbtituloDeTicket = view.findViewById<TextView>(R.id.lbtituloDeTicket)
+    val lbtituloDeTicket: TextView = view.findViewById<TextView>(R.id.lbtituloDeTicket)
     val lbdescripcionDeTicket = view.findViewById<TextView>(R.id.lbdescripcionDeTicket)
     val lbautorDeTicket = view.findViewById<TextView>(R.id.lbautorDeTicket)
     val lbemailDeAutor = view.findViewById<TextView>(R.id.lbemailDeAutor)

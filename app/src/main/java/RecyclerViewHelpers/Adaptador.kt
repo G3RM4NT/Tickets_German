@@ -122,22 +122,33 @@ class Adaptador(private var Datos: List<Ticket>) : RecyclerView.Adapter<ViewHold
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        TODO("Not yet implemented")
 
-val vista =
-LayoutInflater.from(parent.context).inflate()
+        val vista =
+            LayoutInflater.from(parent.context).inflate(
+            German.Gonzalez.germanantoniogonzalezmejiatickets.R.layout.activity_itemcard,
+            parent,
+            false
+        )
+
+
+        return RecyclerViewHelper.ViewHolder(vista)
     }
-    override fun getItemCount() = Datos.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val Ticket = Datos[position]
-        holder.lb = Ticket.Titulo
-        holder.l.text = Ticket.Descripcion
-        holder.lbautorDeTicket.text = Ticket.Autor
-        holder.lbemailDeAutor.text = Ticket.AutorEmail
-        holder.lbfechaDeCreacionDeTicket.text = Ticket.CreationDate
-        holder.lbestadoDeTicket.text = Ticket.TicketStatus
-        holder.lbfechaDeFinalizacionDeTicket.text = Ticket.Finishdate
+        TODO("Not yet implemented")
+    }
+
+    override fun getItemCount() = Datos.size
+
+    over fun onBindViewHolder(holder: RecyclerViewHelper.ViewHolder, position: Int) {
+        val ticket = Datos[position]
+        holder.lbtituloDeTicket.text = ticket.Titulo
+        holder.lbdescripcionDeTicket.text = ticket.Descripcion
+        holder.lbautorDeTicket.text = ticket.Autor
+        holder.lbemailDeAutor.text = ticket.AutorEmail
+        holder.lbfechaDeCreacionDeTicket.text = ticket.CreationDate
+        holder.lbestadoDeTicket.text = ticket.TicketStatus
+        holder.lbfechaDeFinalizacionDeTicket.text = ticket.Finishdate
 
         holder.imgEliminar.setOnClickListener{
 
@@ -150,7 +161,7 @@ LayoutInflater.from(parent.context).inflate()
 
             //Botones
             builder.setPositiveButton("Si") { dialog, which ->
-                eliminarDatos(Ticket.Titulo, position)
+                eliminarDatos(ticket.Titulo, position)
             }
 
             builder.setNegativeButton("No"){dialog, which ->
@@ -171,24 +182,24 @@ LayoutInflater.from(parent.context).inflate()
 
             val txt1 = EditText(context)
             layout.addView(txt1)
-            txt1.setText(Ticket.Titulo)
+            txt1.setText(ticket.Titulo)
             val txt2 = EditText(context)
             layout.addView(txt2)
-            txt2.setText(Ticket.Descripcion)
+            txt2.setText(ticket.Descripcion)
             val txt3 = EditText(context)
             layout.addView(txt3)
-            txt3.setText(Ticket.Autor)
+            txt3.setText(ticket.Autor)
             val txt4 = EditText(context)
             layout.addView(txt4)
-            txt4.setText(Ticket.AutorEmail)
+            txt4.setText(ticket.AutorEmail)
             val txt5 = EditText(context)
-            txt5.setText(Ticket.TicketStatus)
+            txt5.setText(ticket.TicketStatus)
             layout.addView(txt5)
             val txt6 = EditText(context)
-            txt6.setText(Ticket.Finishdate)
+            txt6.setText(ticket.Finishdate)
             layout.addView(txt6)
 
-            val Uuid = Ticket.UUID_Tickets
+            val uuid = ticket.UUID_Tickets
 
             val builder = AlertDialog.Builder(context)
             builder.setView(layout)
@@ -196,7 +207,7 @@ LayoutInflater.from(parent.context).inflate()
 
 
             builder.setPositiveButton("Aceptar") { dialog, which ->
-                actualizarDato(txt1.text.toString(),txt2.text.toString(),txt3.text.toString(),txt4.text.toString(),txt5.text.toString(),txt6.text.toString(),Uuid)
+                actualizarDato(txt1.text.toString(),txt2.text.toString(),txt3.text.toString(),txt4.text.toString(),txt5.text.toString(),txt6.text.toString(),uuid)
                 Toast.makeText(context, "Ticket editado correctamente", Toast.LENGTH_SHORT).show()
 
             }
@@ -211,5 +222,5 @@ LayoutInflater.from(parent.context).inflate()
     }
 
 
+    }
 
-}
