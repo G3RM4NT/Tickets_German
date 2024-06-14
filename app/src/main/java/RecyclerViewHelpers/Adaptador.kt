@@ -1,58 +1,70 @@
 package RecyclerViewHelper
 
-import RecyclerViewHelpers.ViewHolder
+import Modelo.ClaseConexion
+import Modelo.Ticket
+import android.text.Layout
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.lifecycle.livedata.core.R
 import androidx.recyclerview.widget.RecyclerView
-import enrique.chavarria.crud_enriquechavarra.R
+import androidx.recyclerview.widget.RecyclerView.ViewHolder
+
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import modelo.ClaseConexion
-import modelo.Tickets
+
 import java.util.UUID
 
 
-class Adaptador(private var Datos: List<Tickets>) : RecyclerView.Adapter<ViewHolder>() {
+class Adaptador(private var Datos: List<Ticket>) : RecyclerView.Adapter<ViewHolder>() {
 
 
-
-    fun actualizarLista(nuevaLista: List<Tickets>) {
+    fun actualizarLista(nuevaLista: List<Ticket>) {
         Datos = nuevaLista
         notifyDataSetChanged()
     }
 
-    fun actualicePantalla(titulo: String, descripcion: String, autor: String, emailAutor: String, estadoTicket:String, fechaFinalizacion:String, uuid:String){
-        val index = Datos.indexOfFirst { it.uuid == uuid}
-        Datos[index].tituloDeTicket = titulo
-        Datos[index].descripcionDeTicket = descripcion
-        Datos[index].autorDeTicket = autor
-        Datos[index].emailDeAutor = emailAutor
-        Datos[index].estadoDeTicket = estadoTicket
-        Datos[index].fechaDeFinalizacionDeTicket = fechaFinalizacion
+    fun actualicePantalla(
+        Titulo: String,
+        Descripcion: String,
+        Autor: String,
+        Autoremail: String,
+        Creationdate: String,
+        TicketStatus: String,
+        Finishdate: String,
+        UUID_Tickets: String
+    ) {
+        val index = Datos.indexOfFirst { it.UUID_Tickets == UUID_Tickets }
+        Datos[index].Titulo = Titulo
+        Datos[index].Descripcion = Descripcion
+        Datos[index].Autor = Autor
+        Datos[index].AutorEmail = Autoremail
+        Datos[index].AutorEmail = Creationdate
+        Datos[index].TicketStatus = TicketStatus
+        Datos[index].Finishdate = Finishdate
 
         notifyDataSetChanged()
     }
 
 
-
-
-    fun eliminarDatos(titulo: String, posicion: Int){
+    fun eliminarDatos(titulo: String, posicion: Int) {
 
         val listaDatos = Datos.toMutableList()
         listaDatos.removeAt(posicion)
 
-        GlobalScope.launch(Dispatchers.IO){
+        GlobalScope.launch(Dispatchers.IO) {
             //1- Creamos un objeto de la clase conexion
             val objConexion = ClaseConexion().cadenaConexion()
 
             //2- Crear una variable que contenga un PrepareStatement
-            val deleteTicket = objConexion?.prepareStatement("delete from TB_Ticket where tituloDeTicket = ?")!!
+            val deleteTicket =
+                objConexion?.prepareStatement("delete from Tickets where Titulo = ?")!!
             deleteTicket.setString(1, titulo)
             deleteTicket.executeUpdate()
 
@@ -66,46 +78,66 @@ class Adaptador(private var Datos: List<Tickets>) : RecyclerView.Adapter<ViewHol
     }
 
 
-    fun actualizarDato(titulo: String, descripcion: String, autor: String, emailAutor: String, estadoTicket:String, fechaFinalizacion:String, uuid: String){
-        GlobalScope.launch(Dispatchers.IO){
+    fun actualizarDato(
+        Titulo: String,
+        Descripcion: String,
+        Autor: String,
+        Autoremail: String,
+        Creationdate: String,
+        TicketStatus: String,
+        Finishdate: String,
+        UUID_Tickets: String
+    ) {
+        GlobalScope.launch(Dispatchers.IO) {
 
             //1- Creo un objeto de la clase de conexion
             val objConexion = ClaseConexion().cadenaConexion()
 
             //2- creo una variable que contenga un PrepareStatement
-            val addTicket = objConexion?.prepareStatement("UPDATE tb_ticket SET tituloDeticket = ?, descripcionDeTicket = ?, autorDeTicket = ?, emailDeAutor = ?, estadoDeTicket = ?, fechaDeFinalizacionDeTicket = ? WHERE UUID = ?")!!
-            addTicket.setString(1, titulo)
-            addTicket.setString(2, descripcion)
-            addTicket.setString(3, autor)
-            addTicket.setString(4, emailAutor)
-            addTicket.setString(5, estadoTicket)
-            addTicket.setString(6, fechaFinalizacion)
-            addTicket.setString(7, uuid)
+            val addTicket =
+                objConexion?.prepareStatement("UPDATE Tickets SET Titulo = ?, Descripcion = ?, Autor = ?, AutorEmail = ?, CreationDate = ?, TicketStatus = ?,FinishDate = ?  WHERE UUID_Tickets = ?")!!
+            addTicket.setString(1, Titulo)
+            addTicket.setString(2, Descripcion)
+            addTicket.setString(3, Autor)
+            addTicket.setString(4, Autoremail)
+            addTicket.setString(5, Creationdate)
+            addTicket.setString(6, TicketStatus)
+            addTicket.setString(7, Finishdate)
+            addTicket.setString(8, UUID_Tickets)
 
-            withContext(Dispatchers.Main){
-                actualicePantalla(titulo, descripcion, autor, emailAutor, estadoTicket, fechaFinalizacion, uuid)
+            withContext(Dispatchers.Main) {
+                actualicePantalla(
+                    Titulo,
+                    Descripcion,
+                    Autor,
+                    Autoremail,
+                    Creationdate,
+                    TicketStatus,
+                    Finishdate,
+                    UUID_Tickets
+                )
             }
 
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val vista =
-            LayoutInflater.from(parent.context).inflate(R.layout.activity_item_card, parent, false)
+        TODO("Not yet implemented")
 
-        return ViewHolder(vista)
+val vista =
+LayoutInflater.from(parent.context).inflate()
     }
     override fun getItemCount() = Datos.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val ticket = Datos[position]
-        holder.lbtituloDeTicket.text = ticket.tituloDeTicket
-        holder.lbdescripcionDeTicket.text = ticket.descripcionDeTicket
-        holder.lbautorDeTicket.text = ticket.autorDeTicket
-        holder.lbemailDeAutor.text = ticket.emailDeAutor
-        holder.lbfechaDeCreacionDeTicket.text = ticket.fechaDeCreacionDeTicket
-        holder.lbestadoDeTicket.text = ticket.estadoDeTicket
-        holder.lbfechaDeFinalizacionDeTicket.text = ticket.fechaDeFinalizacionDeTicket
+        val Ticket = Datos[position]
+        holder.lb = Ticket.Titulo
+        holder.l.text = Ticket.Descripcion
+        holder.lbautorDeTicket.text = Ticket.Autor
+        holder.lbemailDeAutor.text = Ticket.AutorEmail
+        holder.lbfechaDeCreacionDeTicket.text = Ticket.CreationDate
+        holder.lbestadoDeTicket.text = Ticket.TicketStatus
+        holder.lbfechaDeFinalizacionDeTicket.text = Ticket.Finishdate
 
         holder.imgEliminar.setOnClickListener{
 
@@ -118,7 +150,7 @@ class Adaptador(private var Datos: List<Tickets>) : RecyclerView.Adapter<ViewHol
 
             //Botones
             builder.setPositiveButton("Si") { dialog, which ->
-                eliminarDatos(ticket.tituloDeTicket, position)
+                eliminarDatos(Ticket.Titulo, position)
             }
 
             builder.setNegativeButton("No"){dialog, which ->
@@ -139,24 +171,24 @@ class Adaptador(private var Datos: List<Tickets>) : RecyclerView.Adapter<ViewHol
 
             val txt1 = EditText(context)
             layout.addView(txt1)
-            txt1.setText(ticket.tituloDeTicket)
+            txt1.setText(Ticket.Titulo)
             val txt2 = EditText(context)
             layout.addView(txt2)
-            txt2.setText(ticket.descripcionDeTicket)
+            txt2.setText(Ticket.Descripcion)
             val txt3 = EditText(context)
             layout.addView(txt3)
-            txt3.setText(ticket.autorDeTicket)
+            txt3.setText(Ticket.Autor)
             val txt4 = EditText(context)
             layout.addView(txt4)
-            txt4.setText(ticket.emailDeAutor)
+            txt4.setText(Ticket.AutorEmail)
             val txt5 = EditText(context)
-            txt5.setText(ticket.estadoDeTicket)
+            txt5.setText(Ticket.TicketStatus)
             layout.addView(txt5)
             val txt6 = EditText(context)
-            txt6.setText(ticket.fechaDeFinalizacionDeTicket)
+            txt6.setText(Ticket.Finishdate)
             layout.addView(txt6)
 
-            val uuid = ticket.uuid
+            val Uuid = Ticket.UUID_Tickets
 
             val builder = AlertDialog.Builder(context)
             builder.setView(layout)
@@ -164,7 +196,7 @@ class Adaptador(private var Datos: List<Tickets>) : RecyclerView.Adapter<ViewHol
 
 
             builder.setPositiveButton("Aceptar") { dialog, which ->
-                actualizarDato(txt1.text.toString(),txt2.text.toString(),txt3.text.toString(),txt4.text.toString(),txt5.text.toString(),txt6.text.toString(),uuid)
+                actualizarDato(txt1.text.toString(),txt2.text.toString(),txt3.text.toString(),txt4.text.toString(),txt5.text.toString(),txt6.text.toString(),Uuid)
                 Toast.makeText(context, "Ticket editado correctamente", Toast.LENGTH_SHORT).show()
 
             }
