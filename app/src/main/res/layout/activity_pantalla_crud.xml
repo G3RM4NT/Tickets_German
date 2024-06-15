@@ -100,7 +100,7 @@
         android:layout_width="409dp"
         android:layout_height="317dp"
         tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="544dp" />
+        tools:layout_editor_absoluteY="566dp" />
 
     <Button
         android:id="@+id/btnGuardar"

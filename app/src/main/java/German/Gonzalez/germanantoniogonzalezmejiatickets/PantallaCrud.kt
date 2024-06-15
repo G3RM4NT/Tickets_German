@@ -39,9 +39,9 @@ class PantallaCrud : AppCompatActivity() {
         val txtestadoDeTicket = findViewById<TextView>(R.id.txtestadoTicket)
         val txtfechaDeFinalizacionDeTicket = findViewById<TextView>(R.id.txtFechafinalticket)
         val btnGuardar = findViewById<Button>(R.id.btnGuardar)
-        val rcvTickets = findViewById<RecyclerView>(R.id.rcvTicket)
+        val rcvTicket = findViewById<RecyclerView>(R.id.rcvTicket)
 
-        rcvTickets.layoutManager = LinearLayoutManager(this)
+        rcvTicket.layoutManager = LinearLayoutManager(this)
 
         fun obtenerTickets(): List<Ticket> {
             val objCon = ClaseConexion().cadenaConexion()
@@ -74,7 +74,7 @@ class PantallaCrud : AppCompatActivity() {
             withContext(Dispatchers.Main)
             {
                 val adp = Adaptador(tickets)
-                rcvTickets.adapter = adp
+                rcvTicket.adapter = adp
             }
         }
 
